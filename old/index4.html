@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>"WebIOPi Remote 2.0"</title>
+<script type="text/javascript" src="webiopi.js"></script>
+<script type="text/javascript" src="mousetrap.js"></script>
+<script type="text/javascript">
+
+var fowardPressed = 0
+var leftPressed = 0
+var backPressed = 0
+var rightPressed = 0
+
+webiopi().ready(function() {
+	webiopi().setFunction(10, "out");
+	webiopi().setFunction(9, "out");
+	webiopi().setFunction(8, "out");
+	webiopi().setFunction(7, "out");
+});
+
+function foward(){
+	webiopi().toggleValue(10);
+	webiopi().toggleValue(8);
+}
+
+function left(){
+	webiopi().toggleValue(9);
+	webiopi().toggleValue(8);
+}
+
+function backward(){
+	webiopi().toggleValue(9);
+	webiopi().toggleValue(7);
+}
+
+function right(){
+	webiopi().toggleValue(10);
+	webiopi().toggleValue(7);
+	show()
+}
+
+//////////////////////////////////
+
+function fowardon(){
+	webiopi().digitalWrite(10, 1);
+	webiopi().digitalWrite(8, 1);
+	document.getElementById("foward").style.backgroundColor = "#F54F0E";
+}
+
+function lefton(){
+	webiopi().digitalWrite(9, 1);
+	webiopi().digitalWrite(8, 1);
+}
+
+function backwardon(){
+	webiopi().digitalWrite(9, 1);
+	webiopi().digitalWrite(7, 1);
+}
+
+function righton(){
+	webiopi().digitalWrite(10, 1);
+	webiopi().digitalWrite(7, 1);
+}
+
+/////////////////////////////////
+
+function fowardoff(){
+	webiopi().digitalWrite(10, 0);
+	webiopi().digitalWrite(8, 0);
+}
+
+function leftoff(){
+	webiopi().digitalWrite(9, 0);
+	webiopi().digitalWrite(8, 0);
+}
+
+function backwardoff(){
+	webiopi().digitalWrite(9, 0);
+	webiopi().digitalWrite(7, 0);
+}
+
+function rightoff(){
+	webiopi().digitalWrite(10, 0);
+	webiopi().digitalWrite(7, 0);
+}
+
+/////////////////////////////////
+
+Mousetrap.bind('w', function() { fowardon(); }, 'keydown');
+Mousetrap.bind('a', function() { lefton(); }, 'keydown');
+Mousetrap.bind('s', function() { backwardon(); }, 'keydown');
+Mousetrap.bind('d', function() { righton(); }, 'keydown');
+
+
+Mousetrap.bind('w', function() { fowardoff(); }, 'keyup');
+Mousetrap.bind('a', function() { leftoff(); }, 'keyup');
+Mousetrap.bind('s', function() { backwardoff(); }, 'keyup');
+Mousetrap.bind('d', function() { rightoff(); }, 'keyup');
+</script>
+<style>
+
+.controlButton{
+	font-size:74px;
+	width:120;
+	height:120;
+	background-color:#C7C4C4;
+}
+#foward{
+	margin-left:124px;
+}
+body{
+	margin:0px;
+}
+</style>
+</head>
+<body>
+
+<!--<div id="content" align="center">-->
+<div id="content">
+<button id="foward" class="controlButton" onClick="foward()">F</button><br>
+<button id="left" class="controlButton" onClick="left()">L</button> 
+<button id="back" class="controlButton" onClick="backward()">B</button> 
+<button id="right" class="controlButton" onClick="right()">R</button><br>
+</div>
+
+</body>
+</html>

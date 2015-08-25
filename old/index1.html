@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content = "height = device-height, width = 420, user-scalable = no" /> 
+        <title>WebIOPi | Demo</title>
+        <script type="text/javascript" src="/webiopi.js"></script>
+        <script type="text/javascript">
+        webiopi().ready(function() {
+                webiopi().setFunction(10, "out");
+		webiopi().setFunction(9, "out");
+		webiopi().setFunction(8, "out");
+		webiopi().setFunction(7, "out");
+				
+		var content, button;
+                content = $("#content");
+                        
+                button = webiopi().createGPIOButton(hold, "FL", flDown, flUp);
+                contentLeft.append(button); 
+				
+                button = webiopi().createGPIOButton(hold, "FR", fDown, frUp);
+                contentLeft.append(button); 
+				
+                button = webiopi().createGPIOButton(hold, "BL", blDown, blUp);
+                contentRight.append(button); 
+				
+                button = webiopi().createGPIOButton(hold, "BR", brDown, brUp);
+                contentRight.append(button); 
+				
+                               
+                
+        });
+                
+        function flDown() {
+                webiopi().setValue(10, 1);
+        }
+        function flUp() {
+                webiopi().setValue(10, 0);
+        }
+		
+		function frDown() {
+                webiopi().setValue(9, 1);
+        }
+        function frUp() {
+                webiopi().setValue(9, 0);
+        }
+		
+        function blDown() {
+                webiopi().setValue(8, 1);
+        }
+        function blUp() {
+                webiopi().setValue(8, 0);
+        }
+		
+		function brDown() {
+                webiopi().setValue(7, 1);
+        }
+        function brUp() {
+                webiopi().setValue(7, 0);
+        }
+        
+        
+        </script>
+        <style type="text/css">
+                button {
+                        display: block;
+                        margin: 5px 5px 5px 5px;
+                        width: 160px;
+                        height: 45px;
+                        font-size: 24pt;
+                        font-weight: bold;
+                        color: grey;
+                }
+                
+                input[type="range"] {
+                        display: block;
+                        width: 160px;
+                        height: 45px;
+                }
+                
+                #gpio7.LOW {
+                        background-color: White;
+                }
+                
+                #gpio7.HIGH {
+                        background-color: Red;
+                }
+        </style>
+</head>
+<body>
+        <div id="content" align="center"></div>
+</body>
+</html>

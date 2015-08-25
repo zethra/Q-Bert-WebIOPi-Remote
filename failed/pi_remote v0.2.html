@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content = "height = device-height, width = 420, user-scalable = no" /> 
+        <title>WebIOPi | Demo</title>
+        <script type="text/javascript" src="/webiopi.js"></script>
+        <script type="text/javascript">
+        webiopi().ready(function() {
+		
+		
+		webiopi().setFunction(10, "out");
+		webiopi().setFunction(9, "out");
+		webiopi().setFunction(8, "out");
+		webiopi().setFunction(7, "out");
+		
+                var content, button;
+                content = $("#content");
+                        
+                // you can also create a button which calls a different function for mouse down and up events
+                button = webiopi().createButton("hold", "FL", mousedown, mouseup);
+                content.append(button);
+				
+				// you can also create a button which calls a different function for mouse down and up events
+                button = webiopi().createButton("hold1", "FR", mousedown1, mouseup1);
+                content.append(button);
+				
+				// you can also create a button which calls a different function for mouse down and up events
+                button = webiopi().createButton("hold2", "BL", mousedown2, mouseup2);
+                content.append(button);
+				
+				// you can also create a button which calls a different function for mouse down and up events
+                button = webiopi().createButton("hold3", "BR", mousedown3, mouseup3);
+                content.append(button);
+        });
+                
+        function mousedown() {
+                webiopi().digitalWrite(10, 1);
+        }
+        
+        function mouseup() {
+                webiopi().digitalWrite(10, 0);
+        }
+		
+		function mousedown1() {
+                webiopi().digitalWrite(9, 1);
+        }
+        
+        function mouseup1() {
+                webiopi().digitalWrite(9, 0);
+        }
+		
+		function mousedown2() {
+                webiopi().digitalWrite(8, 1);
+        }
+        
+        function mouseup2() {
+                webiopi().digitalWrite(8, 0);
+        }
+		
+		function mousedown3() {
+                webiopi().digitalWrite(7, 1);
+        }
+        
+        function mouseup3() {
+                webiopi().digitalWrite(7, 0);
+        }
+        
+        
+        </script>
+        <style type="text/css">
+                button {
+                        display: block;
+                        margin: 5px 5px 5px 5px;
+                        width: 160px;
+                        height: 45px;
+                        font-size: 24pt;
+                        font-weight: bold;
+                        color: black;
+                }
+                
+                input[type="range"] {
+                        display: block;
+                        width: 160px;
+                        height: 45px;
+                }
+                
+                #gpio7.LOW {
+                        background-color: White;
+                }
+                
+                #gpio7.HIGH {
+                        background-color: Red;
+                }
+        </style>
+</head>
+<body>
+        <div id="content" align="center"></div>
+</body>
+</html>

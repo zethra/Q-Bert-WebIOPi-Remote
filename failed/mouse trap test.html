@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>"WebIOPi Remote 2.0"</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.hotkeys-0.7.9.min.js"></script>
+<script type="text/javascript" src="mousetrap.js"></script>
+<script type="text/javascript">
+
+function cake(){
+	console.log('cake');
+}
+
+Mousetrap.bind('w', function() { console.log('w'); }, 'keydown');
+Mousetrap.bind('a', function() { console.log('a'); }, 'keydown');
+Mousetrap.bind('s', function() { console.log('s'); }, 'keydown');
+Mousetrap.bind('d', function() { console.log('d'); }, 'keydown');
+Mousetrap.bind('d', function() { cake(); }, 'keydown');
+
+Mousetrap.bind('w', function() { console.log('wu'); }, 'keyup');
+Mousetrap.bind('a', function() { console.log('au'); }, 'keyup');
+Mousetrap.bind('s', function() { console.log('su'); }, 'keyup');
+Mousetrap.bind('d', function() { console.log('du'); }, 'keyup');
+</script>
+<style>
+
+#foward{
+	
+}
+#left{
+	
+}
+
+#back{
+	
+}
+
+#right{
+	
+}
+
+.controlButton{
+	font-size:36px;
+	width:50;
+	height:50;
+	background-color:#C7C4C4;
+}
+</style>
+</head>
+<body>
+
+<div id="content" align="center">
+<button id="foward" class="controlButton" onClick="foward()">F</button><br>
+<button id="left" class="controlButton" onClick="left()">L</button> 
+<button id="back" class="controlButton" onClick="backward()">B</button> 
+<button id="right" class="controlButton" onClick="right()">R</button><br>
+<!--<button id="test" class="controlButton" onClick="show()">Show</button>
+
+<form>
+<input id="keys">
+</form>
+-->
+</div>
+
+</body>
+</html>

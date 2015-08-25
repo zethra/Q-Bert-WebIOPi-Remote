@@ -1,0 +1,432 @@
+<html>
+<head>
+<title>"WebIOPi Remote 2.0"</title>
+<script type="text/javascript" src="webiopi.js"></script>
+<script type="text/javascript" src="mousetrap.js"></script>
+<script type="text/javascript">
+
+this.mode = 0
+this.power = 0
+var fowardPressed = 0
+var leftPressed = 0
+var backPressed = 0
+var rightPressed = 0
+this.pushedFoward = false
+var pushedLeft = false
+var pushedBack = false
+var pushedRight = false
+
+webiopi().ready(function() {
+	webiopi().setFunction(10, "out");
+	webiopi().setFunction(9, "out");
+	webiopi().setFunction(8, "out");
+	webiopi().setFunction(7, "out");
+});
+
+function foward(){
+	move(1);
+	mode = 1;
+	/*
+	resetMotors();
+	//webiopi().toggleValue(10);
+	//webiopi().toggleValue(8);
+	console.log(pushedFoward);
+	if (pushedFoward == false) {
+		document.getElementById("foward").style.backgroundColor = "#F54F0E";
+		webiopi().digitalWrite(10, 1);
+		webiopi().digitalWrite(8, 1);
+		pushedFoward = true;
+		console.log("f");
+	}
+	if (pushedFoward == true){
+		document.getElementById("foward").style.backgroundColor = "#C7C4C4";
+		webiopi().digitalWrite(10, 0);
+		webiopi().digitalWrite(8, 0);
+		pushedFoward = false;
+	}
+	console.log(pushedFoward);
+	*/
+}
+
+function left(){
+	move(2);
+	mode = 2;
+	/*
+	resetMotors("l");
+	//webiopi().toggleValue(9);
+	//webiopi().toggleValue(8);
+	if (pushedLeft == false) {
+		document.getElementById("left").style.backgroundColor = "#F54F0E";
+		webiopi().digitalWrite(9, 1);
+		webiopi().digitalWrite(8, 1);
+		pushedLeft = true;
+	}else{
+		document.getElementById("left").style.backgroundColor = "#C7C4C4";
+		webiopi().digitalWrite(9, 0);
+		webiopi().digitalWrite(8, 0);
+		pushedLeft = false;
+	*/
+}
+
+function backward(){
+	move(3);
+	mode = 3;
+	/*
+	resetMotors("b");
+	webiopi().toggleValue(9);
+	webiopi().toggleValue(7);
+	if (pushedBack == false) {
+		document.getElementById("back").style.backgroundColor = "#F54F0E";
+		pushedBack = true;
+	}else{
+		document.getElementById("back").style.backgroundColor = "#C7C4C4";
+		pushedBack = false;
+	}
+	*/
+}
+
+function right(){
+	move(4);
+	mode = 4
+	/*;
+	resetMotors("r");
+	webiopi().toggleValue(10);
+	webiopi().toggleValue(7);
+	if (pushedRight == false) {
+		document.getElementById("right").style.backgroundColor = "#F54F0E";
+		pushedRight = true;
+	}else{
+		document.getElementById("right").style.backgroundColor = "#C7C4C4";
+		pushedRight = false;
+	}
+	*/
+}
+
+
+function move(dir){
+	if (mode == dir){
+		switch(dir){
+			case 1:
+				if (power == 0){
+					webiopi().digitalWrite(10, 1);
+					webiopi().digitalWrite(8, 1);
+					power = 1;
+					document.getElementById("foward").style.backgroundColor = "#F54F0E";
+				}else{
+					webiopi().digitalWrite(10, 0);
+					webiopi().digitalWrite(8, 0);
+					power = 0;
+					document.getElementById("foward").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+			case 2:
+				if (power == 0){
+					webiopi().digitalWrite(9, 1);
+					webiopi().digitalWrite(8, 1);
+					power = 1;
+					document.getElementById("left").style.backgroundColor = "#F54F0E";
+				}else{
+					webiopi().digitalWrite(9, 0);
+					webiopi().digitalWrite(8, 0);
+					power = 0;
+					document.getElementById("left").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+			case 3:
+				if (power == 0){
+					webiopi().digitalWrite(9, 1);
+					webiopi().digitalWrite(7, 1);
+					power = 1;
+					document.getElementById("back").style.backgroundColor = "#F54F0E";
+				}else{
+					webiopi().digitalWrite(9, 0);
+					webiopi().digitalWrite(7, 0);
+					power = 0;
+					document.getElementById("back").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+			case 4:
+				if (power == 0){
+					webiopi().digitalWrite(10, 1);
+					webiopi().digitalWrite(7, 1);
+					power = 1;
+					document.getElementById("right").style.backgroundColor = "#F54F0E";
+				}else{
+					webiopi().digitalWrite(10, 0);
+					webiopi().digitalWrite(7, 0);
+					power = 0;
+					document.getElementById("right").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+		}
+	}else{
+		switch(mode){
+			case 1:
+				webiopi().digitalWrite(10, 0);
+				webiopi().digitalWrite(8, 0);
+				power = 0;
+				document.getElementById("foward").style.backgroundColor = "#C7C4C4";
+			break;
+			case 2:
+				webiopi().digitalWrite(9, 0);
+				webiopi().digitalWrite(8, 0);
+				power = 0;
+				document.getElementById("left").style.backgroundColor = "#C7C4C4";
+			break;
+			case 3:
+				webiopi().digitalWrite(9, 0);
+				webiopi().digitalWrite(7, 0);
+				power = 0;
+				document.getElementById("back").style.backgroundColor = "#C7C4C4";
+			break;
+			case 4:
+				webiopi().digitalWrite(10, 0);
+				webiopi().digitalWrite(7, 0);
+				power = 0;
+				document.getElementById("right").style.backgroundColor = "#C7C4C4";
+			break;
+		}
+		switch(dir){
+			case 1:
+				if (power == 0){
+					webiopi().digitalWrite(10, 1);
+					webiopi().digitalWrite(8, 1);
+					document.getElementById("foward").style.backgroundColor = "#F54F0E";
+					power = 1;
+				}else{
+					webiopi().digitalWrite(10, 0);
+					webiopi().digitalWrite(8, 0);
+					power = 0;
+					document.getElementById("foward").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+			case 2:
+				if (power == 0){
+					webiopi().digitalWrite(9, 1);
+					webiopi().digitalWrite(8, 1);
+					document.getElementById("left").style.backgroundColor = "#F54F0E";
+					power = 1;
+				}else{
+					webiopi().digitalWrite(9, 0);
+					webiopi().digitalWrite(8, 0);
+					power = 0;
+					document.getElementById("left").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+			case 3:
+				if (power == 0){
+					webiopi().digitalWrite(9, 1);
+					webiopi().digitalWrite(7, 1);
+					document.getElementById("back").style.backgroundColor = "#F54F0E";
+					power = 1;
+				}else{
+					webiopi().digitalWrite(9, 0);
+					webiopi().digitalWrite(7, 0);
+					power = 0;
+					document.getElementById("back").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+			case 4:
+				if (power == 0){
+					webiopi().digitalWrite(10, 1);
+					webiopi().digitalWrite(7, 1);
+					document.getElementById("right").style.backgroundColor = "#F54F0E";
+					power = 1;
+				}else{
+					webiopi().digitalWrite(10, 0);
+					webiopi().digitalWrite(7, 0);
+					power = 0;
+					document.getElementById("right").style.backgroundColor = "#C7C4C4";
+				}
+			break;
+		}
+	}
+}
+//////////////////////////////////
+
+function fowardon(){
+	if (pushedFoward == false){
+		move(1);
+		mode = 1;
+		pushedFoward = true;
+	}
+	
+	/*
+	if (pushedFoward == false){
+		resetMotors();
+	}
+	webiopi().digitalWrite(10, 1);
+	webiopi().digitalWrite(8, 1);
+	document.getElementById("foward").style.backgroundColor = "#F54F0E";
+	pushedFoward = true;
+	*/
+}
+
+function lefton(){
+	if (pushedLeft == false){
+		move(2);
+		mode = 2;
+		pushedLeft = true;
+	}
+	/*
+	if (pushedLeft == false){
+		resetMotors();
+	}
+	webiopi().digitalWrite(9, 1);
+	webiopi().digitalWrite(8, 1);
+	document.getElementById("left").style.backgroundColor = "#F54F0E";
+	pushedLeft = true;
+	*/
+}
+
+function backwardon(){
+	if (pushedBack == false){
+		move(3);
+		mode = 3;
+		pushedBack = true;
+	}
+	/*
+	if (pushedBack == false){
+		resetMotors();
+	}
+	resetMotors();
+	webiopi().digitalWrite(9, 1);
+	webiopi().digitalWrite(7, 1);
+	document.getElementById("back").style.backgroundColor = "#F54F0E";
+	pushedBack = true;
+	*/
+}
+
+function righton(){
+	if (pushedRight == false){
+		move(4);
+		mode = 4;
+		pushedRight = true;
+	}
+	/*
+	if (pushedRight == false){
+		resetMotors();
+	}
+	resetMotors();
+	webiopi().digitalWrite(10, 1);
+	webiopi().digitalWrite(7, 1);
+	document.getElementById("right").style.backgroundColor = "#F54F0E";
+	pushedRight = true;
+	*/
+}
+
+/////////////////////////////////
+
+function fowardoff(){
+	move(1);
+	mode = 1;
+	pushedFoward = false;
+	/*
+	webiopi().digitalWrite(10, 0);
+	webiopi().digitalWrite(8, 0);
+	document.getElementById("foward").style.backgroundColor = "#C7C4C4";
+	pushedFoward = false;
+	*/
+}
+
+function leftoff(){
+	move(2);
+	mode = 2;
+	pushedLeft = false;
+	/*
+	webiopi().digitalWrite(9, 0);
+	webiopi().digitalWrite(8, 0);
+	document.getElementById("left").style.backgroundColor = "#C7C4C4";
+	pushedLeft = false;
+	*/
+}
+
+function backwardoff(){
+	move(3);
+	mode = 3;
+	pushedBack = false;
+	/*
+	webiopi().digitalWrite(9, 0);
+	webiopi().digitalWrite(7, 0);
+	document.getElementById("back").style.backgroundColor = "#C7C4C4";
+	pushedBack = false;
+	*/
+}
+
+function rightoff(){
+	move(4);
+	mode = 4;
+	pushedRight = false;
+	/*
+	webiopi().digitalWrite(10, 0);
+	webiopi().digitalWrite(7, 0);
+	document.getElementById("right").style.backgroundColor = "#C7C4C4";
+	pushedRight = false;
+	*/
+}
+
+/////////////////////////////////
+
+function resetMotors(motor){
+		webiopi().digitalWrite(10, 0);
+		webiopi().digitalWrite(9, 0);
+		webiopi().digitalWrite(8, 0);
+		webiopi().digitalWrite(7, 0);
+		document.getElementById("foward").style.backgroundColor = "#C7C4C4";
+		document.getElementById("left").style.backgroundColor = "#C7C4C4";
+		document.getElementById("back").style.backgroundColor = "#C7C4C4";
+		document.getElementById("right").style.backgroundColor = "#C7C4C4";
+		power = 0;
+		mode = 0;
+}
+
+function debugpage(){
+	
+}
+
+////////////////////////////////
+
+Mousetrap.bind('w', function() { fowardon(); }, 'keydown');
+Mousetrap.bind('a', function() { lefton(); }, 'keydown');
+Mousetrap.bind('s', function() { backwardon(); }, 'keydown');
+Mousetrap.bind('d', function() { righton(); }, 'keydown');
+Mousetrap.bind('r', function() { resetMotors(); }, 'keydown');
+Mousetrap.bind('l', function() { resetMotors(); }, 'keydown');
+
+
+Mousetrap.bind('w', function() { fowardoff(); }, 'keyup');
+Mousetrap.bind('a', function() { leftoff(); }, 'keyup');
+Mousetrap.bind('s', function() { backwardoff(); }, 'keyup');
+Mousetrap.bind('d', function() { rightoff(); }, 'keyup');
+</script>
+<style>
+
+.controlButton{
+	font-size:74px;
+	width:120;
+	height:120;
+	background-color:#C7C4C4;
+}
+#foward{
+	margin-left:124px;
+}
+html, body{
+	margin:0px;
+	padding:0px;
+	height:100%;
+	width:100%;
+}
+</style>
+</head>
+<body>
+
+<!--<div id="content" align="center">-->
+<div id="content">
+<button id="foward" class="controlButton" onClick="foward()">F</button><br>
+<button id="left" class="controlButton" onClick="left()">L</button> 
+<button id="back" class="controlButton" onClick="backward()">B</button> 
+<button id="right" class="controlButton" onClick="right()">R</button><br>
+</div>
+
+</body>
+</html>

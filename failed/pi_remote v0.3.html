@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>"WebIOPi Remote 2.0"</title>
+<script type="text/javascript" src="/webiopi.js"></script>
+<script>
+
+var fowardPressed = 0
+var leftPressed = 0
+var backPressed = 0
+var rightPressed = 0
+
+webiopi().ready(function() {
+	webiopi().setFunction(10, "out");
+	webiopi().setFunction(9, "out");
+	webiopi().setFunction(8, "out");
+	webiopi().setFunction(7, "out");
+});
+
+function foward(){
+	webiopi().toggleValue(10)
+/*	if (fowardPressed==0)
+	{
+		webiopi().digitalWrite(10, 1);
+		webiopi().digitalWrite(8, 1);
+		fowardPressed = 1;
+		document.getElementById("foward").style.backgroundColor="#FF8600";
+	}
+	else if(fowardPressed==1)
+	{
+		webiopi().digitalWrite(10, 0);
+		webiopi().digitalWrite(8, 0);
+		fowardPressed = 0;
+		document.getElementById("foward").style.backgroundColor="#C7C4C4";
+	}
+	else
+	{
+		content.append("foward error");
+	}
+*/
+}
+</script>
+<style>
+
+#foward{
+	
+}
+#left{
+	
+}
+
+#back{
+	
+}
+
+#right{
+	
+}
+
+.controlButton{
+	font-size:36px;
+	width:50;
+	background-color:#C7C4C4;
+}
+</style>
+</head>
+<body>
+
+<div id="content" align="center">
+<button id="foward" class="controlButton" onClick="foward()">F</button><br>
+<button id="left" class="controlButton">L</button> 
+<button id="back" class="controlButton">B</button> 
+<button id="right" class="controlButton">R</button>
+</div>
+
+</body>
+</html>
